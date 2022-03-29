@@ -1,0 +1,34 @@
+
+
+// getting externalId
+			for (ExternalIdType ExternalId : serviceInfo.getService()
+					.getExternalIds().getExternalId())//throws the list of externalId's available with attributes
+				if (ExternalId
+						.getExternalIdType()
+						.toString()
+						.equals(String.valueOf(ExternalIdTypeEnum.DSL_ID
+								.getExternalTypeId())))
+                //getting externalIdType with some codition
+                {
+					externalId = ExternalId.getExternalId();
+				} else {
+					log.info(
+							"[X] No DSL externalIdType found with given service ID {}",
+							subscriberId);
+				}
+        
+        
+			// getting availableBalance
+			for (BalanceType balanceType : serviceInfo.getService()
+					.getBalances().getBalance())
+				if (balanceType
+						.getBalanceId()
+						.toString()
+						.equals(String
+								.valueOf(ComverseTypeMapper.SPENDING_LIMIT_ID))) {
+					availBalance = balanceType.getAvailableBalance();
+				} else {
+					log.info(
+							"[X] No required balance found with given service ID {}",
+							subscriberId);
+				}
